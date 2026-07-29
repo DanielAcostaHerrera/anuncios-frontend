@@ -1,0 +1,879 @@
+/* --------------------------------------------------
+   GLOBAL
+-------------------------------------------------- */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #1e1e1e;
+  min-height: 100vh;
+  width: 100%;
+}
+
+#root {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
+}
+
+.carousel {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.carousel-track {
+  overflow-x: auto;
+  white-space: nowrap;
+  flex: 1;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.carousel-track::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel-img {
+  width: 180px;
+  height: 250px;
+  object-fit: fill;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease;
+  margin-right: 10px;
+}
+
+.carousel-img:hover {
+  transform: scale(1.05);
+}
+
+.carousel-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.3);
+  color: #fff;
+  border: none;
+  padding: 12px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.5rem;
+  transition: background-color 0.2s;
+  z-index: 10;
+}
+
+.carousel-button:hover {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.carousel-button.left {
+  left: 10px;
+}
+
+.carousel-button.right {
+  right: 10px;
+}
+
+.brand-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.brand-box img {
+  height: 80px;
+}
+
+.brand-box h1 {
+  font-weight: 600;
+  color: #f0f0f0;
+  font-size: 2rem;
+  margin: 0;
+}
+
+/* --------------------------------------------------
+   INPUTS Y FILTROS
+-------------------------------------------------- */
+.filtro-input {
+  width: 100%;
+  height: 32px;
+  padding: 6px;
+  border-radius: 4px;
+  border: 1px solid #444;
+  background-color: #ffffff;
+  color: #000000;
+  box-sizing: border-box;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.filtro-sufijo {
+  margin-left: 6px;
+  color: #ccc;
+  line-height: 32px;
+}
+
+.filtros-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.filtro-nombre {
+  grid-column: span 2;
+}
+
+.btn-dark {
+  background: #2a2a2a;
+  padding: 8px 14px;
+  color: #f0f0f0;
+  border: 1px solid #444;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.btn-dark:hover {
+  background-color: #555;
+  transform: scale(1.05);
+}
+
+/* --------------------------------------------------
+   DETALLE DE JUEGO (PC)
+-------------------------------------------------- */
+.detalle-wrapper {
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.detalle-titulo {
+  text-align: center;
+  color: #f0f0f0;
+  font-size: 28px;
+  margin-bottom: 20px;
+  margin-top: 10px;
+  font-weight: 700;
+}
+
+.detalle-container {
+  background-color: #1e1e1e;
+  color: #f0f0f0;
+  padding: 0;
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.detalle-portada {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.detalle-portada-img {
+  width: 220px;
+  height: 300px;
+  object-fit: fill;
+  background-color: #000;
+  border-radius: 6px;
+  display: block;
+}
+
+
+.detalle-info {
+  flex: 1;
+  min-width: 0;
+  background: #1a1a1a;
+  padding: 16px;
+  border-radius: 10px;
+  border: 1px solid #2a2a2a;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+.detalle-extra {
+  width: 100%;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.detalle-card {
+  background: #1a1a1a;
+  padding: 16px;
+  border-radius: 10px;
+  border: 1px solid #2a2a2a;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+/* --------------------------------------------------
+   VER ANUNCIO
+-------------------------------------------------- */
+
+.ver-wrapper {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  color: white;
+}
+
+.ver-imagen img {
+  width: 100%;
+  height: auto;          /* mantiene proporción */
+  max-height: 450px;     /* un poco más grande que antes */
+  object-fit: contain;   /* muestra la imagen completa */
+  border-radius: 10px;
+  display: block;
+  margin: 0 auto 20px auto; /* centrada */
+}
+
+/* Título y precio */
+.ver-titulo {
+  text-align: left;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: #f0f0f0;
+}
+
+.ver-precio {
+  text-align: left;
+  font-size: 20px;       /* un poco más pequeño que el título */
+  font-weight: 600;      /* negrito */
+  margin-top: -4px;      /* más cerca del título */
+  margin-bottom: 16px;   /* espacio antes del bloque siguiente */
+  color: #f0f0f0;        /* mismo color que el texto, sin verde */
+}
+
+/* Bloque de fecha y ubicación */
+.ver-info-fila {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #2a2a2a;
+  padding: 10px 14px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  color: #ccc;
+}
+
+.ver-fecha {
+  font-style: italic;
+}
+
+.ver-ubicacion {
+  font-weight: 600;
+  color: #f0f0f0;
+}
+
+/* Botones de contacto */
+.ver-contacto {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+.btn-whatsapp,
+.btn-llamar {
+  flex: 1;
+  padding: 12px;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: bold;
+  text-decoration: none;
+  color: white;
+}
+
+.btn-whatsapp {
+  background-color: #25D366;
+}
+
+.btn-llamar {
+  background-color: #007bff;
+}
+
+/* Descripción */
+.ver-descripcion {
+  background: #1a1a1a;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.ver-descripcion h3 {
+  margin-bottom: 10px;
+}
+
+/* Adaptación móvil */
+@media (max-width: 600px) {
+  .ver-info-fila {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+}
+
+
+/* --------------------------------------------------
+   DETALLE DE JUEGO (MÓVIL)
+-------------------------------------------------- */
+@media (max-width: 950px) {
+  .detalle-titulo {
+    font-size: 24px;
+    margin-bottom: 16px;
+  }
+
+  .detalle-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 0;
+  }
+
+  .detalle-portada {
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .detalle-info {
+    width: 100%;
+    margin-top: 10px;
+    text-align: left;
+  }
+
+  .detalle-extra {
+    text-align: center;
+    margin-top: 10px !important;
+  }
+
+  .detalle-extra p {
+    margin-left: 0 !important;
+  }
+
+  .detalle-extra>div {
+    margin-top: 10px !important;
+  }
+
+  .insertar-portada {
+    width: 100% !important;
+    max-width: none !important;
+  }
+}
+
+/* --------------------------------------------------
+   FILTROS (MÓVIL)
+-------------------------------------------------- */
+@media (max-width: 950px) {
+  .filtros-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .texto-multilinea {
+    white-space: pre-line;
+  }
+
+  .filtro-nombre {
+    grid-column: span 1;
+  }
+}
+
+/* --------------------------------------------------
+   CARRITO
+-------------------------------------------------- */
+.carrito-lista {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.carrito-lista li {
+  background-color: #2a2a2a;
+  color: #f0f0f0;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.carrito-lista button {
+  background-color: #444;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 6px 10px;
+  cursor: pointer;
+}
+
+.carrito-lista button:hover {
+  background-color: #666;
+}
+
+.btns-carrito {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+@media (max-width: 950px) {
+  .btns-carrito {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+/* --------------------------------------------------
+   BOTONES GENERALES
+-------------------------------------------------- */
+.btn-add,
+.btn-carrito,
+.btn-exportar {
+  padding: 8px 12px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.btn-add:hover,
+.btn-carrito:hover:not(:disabled),
+.btn-exportar:hover {
+  background-color: #555;
+  transform: scale(1.05);
+}
+
+.btn-carrito:disabled {
+  background-color: #1a1a1a;
+  color: #777;
+  cursor: not-allowed;
+  opacity: 0.7;
+  transform: none;
+}
+
+.btn-exportar {
+  margin-top: 20px;
+  padding: 10px 16px;
+  background-color: #4285f4;
+}
+
+.btn-exportar:hover {
+  background-color: #3367d6;
+}
+
+/* --------------------------------------------------
+   HEADER (PC)
+-------------------------------------------------- */
+@media (min-width: 951px) {
+  .site-header {
+    position: relative;
+    width: 100%;
+  }
+
+  .header-container {
+    position: relative;
+    width: 100%;
+  }
+
+  .logo-box {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+  }
+
+  .title-box {
+    position: absolute;
+    top: 13px;
+    left: 60px;
+    text-align: left;
+    margin: 0;
+  }
+
+  .header-title {
+    font-weight: 600;
+    color: #f0f0f0;
+    white-space: nowrap;
+  }
+
+  .hamburger-btn {
+    position: absolute;
+    right: 0px;
+    top: 12px;
+    width: 26px;
+    height: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    color: #f0f0f0;
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+    z-index: 10;
+  }
+
+  .desktop-nav {
+    display: none !important;
+  }
+
+  .mobile-menu {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 60px;
+    gap: 10px;
+    text-align: left;
+  }
+
+  .mobile-menu a,
+  .mobile-menu button {
+    width: 100%;
+    text-align: left;
+  }
+
+  .admin-lock-desktop {
+    display: block !important;
+    position: absolute;
+    right: 25px;
+    top: 0px;
+    background: transparent;
+    border: none;
+    color: #e6e6e6;
+    font-size: 20px;
+    cursor: pointer;
+  }
+}
+
+/* --------------------------------------------------
+   HEADER (MÓVIL)
+-------------------------------------------------- */
+@media (max-width: 950px) {
+  .site-header {
+    position: static;
+  }
+
+  .header-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+  }
+
+  .logo-box {
+    position: absolute;
+    transform: translateX(-100%);
+    top: 0;
+    left: calc(50% - 60px);
+  }
+
+  .title-box {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  .header-title {
+    font-weight: 600;
+    color: #f0f0f0;
+    white-space: nowrap;
+  }
+
+  .hamburger-btn {
+    position: absolute;
+    right: 0px;
+    top: 12px;
+    width: 26px;
+    height: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    color: #f0f0f0;
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+    z-index: 10;
+  }
+
+  .desktop-nav {
+    display: none !important;
+  }
+
+  .mobile-menu {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 12px;
+    gap: 10px;
+    text-align: center;
+  }
+
+  .mobile-menu a,
+  .mobile-menu button {
+    width: 100%;
+    text-align: center;
+  }
+
+  .admin-lock-desktop {
+    display: block !important;
+    position: absolute;
+    right: 25px;
+    top: 0px;
+    background: transparent;
+    border: none;
+    color: #e6e6e6;
+    font-size: 20px;
+    cursor: pointer;
+  }
+}
+
+/* --------------------------------------------------
+   Candado dentro del menú (PC y MÓVIL)
+-------------------------------------------------- */
+.admin-lock-mobile {
+  background: transparent;
+  border: none;
+  color: #e6e6e6;
+  font-size: 20px;
+  padding: 10px 14px;
+  width: 100%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+
+/* --------------------------------------------------
+   SELECTOR DE LÍMITE (ÚLTIMOS ESTRENOS)
+-------------------------------------------------- */
+.selector-limit {
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.selector-limit label {
+  color: #f0f0f0;
+  font-size: 14px;
+}
+
+.selector-limit input {
+  padding: 6px 10px;
+  border-radius: 4px;
+  border: 1px solid #555;
+  background-color: #222;
+  color: #f0f0f0;
+  font-size: 14px;
+  text-align: center;
+  width: 80px;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.selector-limit input:focus {
+  outline: none;
+  background-color: #333;
+}
+
+/* --------------------------------------------------
+   Modal de Autenticación
+-------------------------------------------------- */
+
+.auth-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.auth-modal {
+  background: #2b2b2b;
+  padding: 25px 30px;
+  border-radius: 10px;
+  width: 320px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+  animation: authFadeIn 0.25s ease-out;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+@keyframes authFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.auth-title {
+  margin: 0;
+  margin-bottom: 10px;
+  text-align: center;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.auth-input {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid #444;
+  background: #1e1e1e;
+  color: #fff;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.auth-input:focus {
+  border-color: #3a7afe;
+}
+
+.auth-error {
+  color: #ff6b6b;
+  font-size: 13px;
+  margin: 0;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+.auth-btn-login {
+  width: 100%;
+  padding: 10px;
+  background: #3a7afe;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.auth-btn-login:hover {
+  background: #2f63d6;
+}
+
+.auth-btn-cancel {
+  width: 100%;
+  padding: 10px;
+  background: #555;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.auth-btn-cancel:hover {
+  background: #666;
+}
+
+.admin-edit-btn,
+.admin-delete-btn {
+  padding: 6px 10px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.2s, transform 0.15s;
+}
+
+.admin-edit-btn {
+  background: #3a3a3a;
+  color: white;
+}
+
+.admin-edit-btn:hover {
+  background: #4a4a4a;
+  transform: scale(1.05);
+}
+
+.admin-delete-btn {
+  background: #7a1f1f;
+  color: white;
+}
+
+.admin-delete-btn:hover {
+  background: #9a2a2a;
+  transform: scale(1.05);
+}
+
+/* --------------------------------------------------
+   Inputs oscuros para formularios
+-------------------------------------------------- */
+
+.input-dark {
+  width: 100%;
+  padding: 8px 10px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  border: 1px solid #444;
+  background-color: #111;
+  color: #f0f0f0;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.input-dark:focus {
+  outline: none;
+  border-color: #888;
+}
+
+textarea.input-dark {
+  resize: vertical;
+}
+
+/* ====== Botón oscuro genérico (Guardar Cambios, etc.) ====== */
+
+.btn-guardar {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #1e1e1e;
+  color: #f0f0f0;
+  border: 1px solid #444;
+  border-radius: 4px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.btn-guardar:hover {
+  background-color: #2a2a2a;
+  transform: translateY(-1px);
+}
+
+.btn-guardar:active {
+  transform: translateY(0);
+}
