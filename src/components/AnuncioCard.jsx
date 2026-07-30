@@ -38,7 +38,7 @@ export default function AnuncioCard({ anuncio, showToast, from }) {
           style={{
             width: "100%",
             height: 180,
-            objectFit: "cover",
+            objectFit: "fill",
             backgroundColor: "var(--color-bg-alt)",  // azul clarito
             transition: "transform 0.2s, box-shadow 0.2s",
             display: "block",

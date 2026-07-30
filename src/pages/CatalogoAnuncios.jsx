@@ -479,7 +479,8 @@ export default function CatalogoAnuncios({ showToast }) {
           return (
             <>
               <div
-                style={{
+                className="anuncios-grid"
+                style={{                
                   display: "grid",
                   gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))",
                   gap: "20px"

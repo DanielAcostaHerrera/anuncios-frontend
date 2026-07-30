@@ -137,17 +137,24 @@ body {
   line-height: 32px;
 }
 
+/* GRID PRINCIPAL DE FILTROS (PC) */
 .filtros-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, 1fr);   /* ✔ PC: dos columnas */
   gap: 12px;
   margin-bottom: 20px;
+  background-color: var(--color-bg);       /* azul suave */
+  padding: 15px;
+  border-radius: 10px;
+  /* ❌ sin borde */
 }
 
+/* Elementos que deben ocupar toda la fila */
 .filtro-nombre {
   grid-column: span 2;
 }
 
+/* BOTÓN */
 .btn-dark {
   background: var(--color-primary);
   padding: 8px 14px;
@@ -163,6 +170,40 @@ body {
   background-color: var(--color-primary-dark);
   transform: scale(1.05);
 }
+
+/* PC: varias columnas */
+.anuncios-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+/* --------------------------------------------------
+   RESPONSIVE: MODO CELULAR (950px o menos)
+-------------------------------------------------- */
+@media (max-width: 950px) {
+  .filtros-grid {
+    grid-template-columns: 1fr !important;   /* ✔ una sola columna */
+    gap: 10px;
+    padding: 12px;
+  }
+
+  .filtros-grid > div {
+    grid-column: 1 / -1 !important;          /* ✔ cada bloque ocupa toda la fila */
+  }
+
+  .catalogo-container {
+    padding: 14px !important;                /* ✔ más compacto en móvil */
+  }
+}
+
+/* MÓVIL: una sola columna */
+@media (max-width: 950px) {
+  .anuncios-grid {
+    grid-template-columns: 1fr !important;   /* ✔ una sola columna */
+  }
+}
+
 
 /* --------------------------------------------------
    DETALLE DE JUEGO (PC)
@@ -236,7 +277,6 @@ body {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15); /* sombra clara */
   color: var(--color-text);               /* texto azul oscuro */
 }
-
 
 /* --------------------------------------------------
    VER ANUNCIO

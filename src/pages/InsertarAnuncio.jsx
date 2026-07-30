@@ -134,7 +134,9 @@ const construirPayload = () => {
           borderRadius: 10,
           border: "1px solid var(--color-border)",
           display: "flex",
-          gap: 20
+          gap: 20,
+          width: "100%",
+          boxSizing: "border-box", 
         }}
       >
         {/* Foto */}
@@ -366,7 +368,9 @@ const construirPayload = () => {
           border: "1px solid var(--color-border)",
           display: "flex",
           flexDirection: "column",
-          gap: 15
+          gap: 15,
+          width: "100%", 
+          boxSizing: "border-box"
         }}
       >
         <div className="detalle-card">
