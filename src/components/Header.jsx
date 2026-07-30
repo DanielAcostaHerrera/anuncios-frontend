@@ -42,22 +42,7 @@ export default function Header() {
             />
           </NavLink>
         </div>
-
-        {/* Nombre del negocio */}
-        <div className="title-box">
-          <span
-            className="header-title"
-            style={{
-              fontWeight: 600,
-              color: "var(--color-text)",          // ✔ texto azul oscuro
-              whiteSpace: "nowrap",
-              fontSize: "1.4rem"
-            }}
-          >
-            Ventas, Rentas, Habana
-          </span>
-        </div>
-
+      
         {/* Candadito */}
         <button
           onClick={() => {
