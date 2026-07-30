@@ -11,7 +11,7 @@ export function AuthProvider({ children }) {
     }, []);
 
     function login(user, pass) {
-        if (user === "roxana" && pass === "roxana123") {
+        if (user === "Roxana" && pass === "RoxBad2376$") {
             setIsLogged(true);
             sessionStorage.setItem("auth", "1");
             return true;
