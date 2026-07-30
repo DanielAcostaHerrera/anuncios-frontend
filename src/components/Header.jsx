@@ -8,7 +8,13 @@ export default function Header() {
   const auth = useAuth();
 
   return (
-    <header className="site-header">
+    <header
+      className="site-header"
+      style={{
+        backgroundColor: "var(--color-bg-alt)",   // ✔ mismo azul del catálogo
+        padding: "10px 0"                         // ✔ sin borde inferior
+      }}
+    >
       <div
         className="header-container"
         style={{
@@ -19,6 +25,10 @@ export default function Header() {
           gap: 12,
           boxSizing: "border-box",
           position: "relative",
+
+          backgroundColor: "var(--color-bg-alt)", // ✔ igual que el catálogo
+          borderRadius: 10,                       // ✔ suave
+          // ❌ sin borde
         }}
       >
         {/* Logo */}
@@ -39,8 +49,9 @@ export default function Header() {
             className="header-title"
             style={{
               fontWeight: 600,
-              color: "#f0f0f0",
+              color: "var(--color-text)",          // ✔ texto azul oscuro
               whiteSpace: "nowrap",
+              fontSize: "1.4rem"
             }}
           >
             Ventas, Rentas, Habana
@@ -54,6 +65,14 @@ export default function Header() {
             else setShowLogin(true);
           }}
           className="admin-lock-desktop"
+          style={{
+            backgroundColor: "transparent",
+            color: "var(--color-primary)",         // ✔ azul fuerte
+            fontSize: 22,
+            cursor: "pointer",
+            border: "none",
+            marginLeft: "auto"                     // ✔ candado a la derecha
+          }}
         >
           {auth.isLogged ? "🔓" : "🔐"}
         </button>
@@ -63,3 +82,6 @@ export default function Header() {
     </header>
   );
 }
+
+
+

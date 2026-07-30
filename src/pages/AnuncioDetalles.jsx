@@ -14,14 +14,12 @@ export default function AnuncioDetalles() {
 
         const a = data.anuncio;
 
-        // Función para enviar WhatsApp con número formateado
+        // WhatsApp
         const enviarWhatsApp = () => {
           if (!a.Celular) return;
 
           let numero = a.Celular.toString().replace(/\D/g, "");
-          if (!numero.startsWith("53")) {
-            numero = "53" + numero;
-          }
+          if (!numero.startsWith("53")) numero = "53" + numero;
 
           const mensaje = `Hola, le escribo en relación a su anuncio: ${a.Titulo}`;
           const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
@@ -29,14 +27,25 @@ export default function AnuncioDetalles() {
           window.open(url, "_blank");
         };
 
-        // Normalizar número fijo (pero ya NO se usa para llamar)
+        // Fijo normalizado (no clickeable)
         let fijo = a.Fijo?.toString().replace(/\D/g, "") || "";
-        if (fijo && !fijo.startsWith("53")) {
-          fijo = "53" + fijo;
-        }
+        if (fijo && !fijo.startsWith("53")) fijo = "53" + fijo;
 
         return (
-          <div className="ver-wrapper">
+          <div
+            className="ver-wrapper"
+            style={{
+              backgroundColor: "var(--color-bg)",   // igual que filtros
+              padding: 20,
+              borderRadius: 10,
+              border: "1px solid var(--color-border)", // borde suave
+              maxWidth: 600,
+              margin: "0 auto",
+              display: "flex",
+              flexDirection: "column",
+              gap: 15
+            }}
+          >
 
             {/* Imagen */}
             <div className="ver-imagen">
@@ -72,7 +81,9 @@ export default function AnuncioDetalles() {
                 <Query query={GET_PROVINCIAS}>
                   {({ loading, error, data }) => {
                     if (loading || error) return null;
+
                     const provincia = data.provincias.find(p => p.Id === a.Provincia)?.nombre || "";
+
                     return (
                       <Query query={GET_MUNICIPIOS} variables={{ IdProvincia: a.Provincia }}>
                         {({ loading, error, data }) => {
@@ -99,7 +110,7 @@ export default function AnuncioDetalles() {
                 </button>
               )}
 
-              {/* Teléfono fijo — YA NO ES CLICKEABLE */}
+              {/* Teléfono fijo */}
               {a.Fijo && (
                 <div className="btn-llamar" style={{ cursor: "default" }}>
                   ☎️ Fijo: {a.Fijo}
@@ -118,5 +129,6 @@ export default function AnuncioDetalles() {
     </Query>
   );
 }
+
 
 

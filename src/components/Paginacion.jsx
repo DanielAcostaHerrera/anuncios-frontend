@@ -5,7 +5,6 @@ export default function Paginacion({ page, totalPages, onPageChange }) {
 
     const getPages = () => {
         const pages = [];
-
         pages.push(1);
 
         let start = Math.max(2, page - 4);
@@ -21,13 +20,9 @@ export default function Paginacion({ page, totalPages, onPageChange }) {
             }
         }
 
-        for (let i = start; i <= end; i++) {
-            pages.push(i);
-        }
+        for (let i = start; i <= end; i++) pages.push(i);
 
-        if (totalPages > 1) {
-            pages.push(totalPages);
-        }
+        if (totalPages > 1) pages.push(totalPages);
 
         return pages;
     };
@@ -47,6 +42,7 @@ export default function Paginacion({ page, totalPages, onPageChange }) {
 
     return (
         <div style={{ textAlign: "center", marginTop: 20, width: "100%" }}>
+            {/* Botones de páginas */}
             <div
                 style={{
                     display: "flex",
@@ -55,15 +51,16 @@ export default function Paginacion({ page, totalPages, onPageChange }) {
                     gap: "8px",
                 }}
             >
+                {/* Página anterior */}
                 {page > 1 && (
                     <button
                         onClick={() => onPageChange(page - 1)}
                         style={{
                             borderRadius: 6,
-                            border: "1px solid #444",
+                            border: "1px solid var(--color-border)",
                             padding: "8px 16px",
-                            backgroundColor: "#2b2b2b",
-                            color: "#f0f0f0",
+                            backgroundColor: "var(--color-primary)",
+                            color: "white",
                             cursor: "pointer",
                         }}
                         aria-label="Página anterior"
@@ -72,24 +69,42 @@ export default function Paginacion({ page, totalPages, onPageChange }) {
                     </button>
                 )}
 
+                {/* Páginas */}
                 {pages.map((p, idx) => {
                     const prev = pages[idx - 1];
                     const showEllipsis = prev && p - prev > 1;
+
                     return (
                         <React.Fragment key={p}>
                             {showEllipsis && (
-                                <span style={{ color: "#f0f0f0", margin: "0 4px" }}>…</span>
+                                <span
+                                    style={{
+                                        color: "var(--color-text)",
+                                        margin: "0 4px",
+                                        fontWeight: 600,
+                                    }}
+                                >
+                                    …
+                                </span>
                             )}
+
                             <button
                                 onClick={() => onPageChange(p)}
                                 style={{
                                     borderRadius: 6,
-                                    border: "1px solid #444",
+                                    border: "1px solid var(--color-border)",
                                     padding: "8px 16px",
-                                    backgroundColor: p === page ? "#444" : "#2b2b2b",
-                                    color: "#f0f0f0",
+                                    backgroundColor:
+                                        p === page
+                                            ? "var(--color-primary)"
+                                            : "var(--color-bg)",
+                                    color:
+                                        p === page
+                                            ? "white"
+                                            : "var(--color-text)",
                                     fontWeight: p === page ? "bold" : "normal",
                                     cursor: "pointer",
+                                    transition: "0.2s",
                                 }}
                                 aria-current={p === page ? "page" : undefined}
                             >
@@ -99,15 +114,16 @@ export default function Paginacion({ page, totalPages, onPageChange }) {
                     );
                 })}
 
+                {/* Página siguiente */}
                 {page < totalPages && (
                     <button
                         onClick={() => onPageChange(page + 1)}
                         style={{
                             borderRadius: 6,
-                            border: "1px solid #444",
+                            border: "1px solid var(--color-border)",
                             padding: "8px 16px",
-                            backgroundColor: "#2b2b2b",
-                            color: "#f0f0f0",
+                            backgroundColor: "var(--color-primary)",
+                            color: "white",
                             cursor: "pointer",
                         }}
                         aria-label="Página siguiente"
@@ -117,10 +133,18 @@ export default function Paginacion({ page, totalPages, onPageChange }) {
                 )}
             </div>
 
-            <div style={{ marginTop: 12, color: "#f0f0f0" }}>
+            {/* Texto de página */}
+            <div
+                style={{
+                    marginTop: 12,
+                    color: "var(--color-text)",
+                    fontWeight: 600,
+                }}
+            >
                 Página {page} de {totalPages}
             </div>
 
+            {/* Input para ir a página */}
             <div style={{ marginTop: 8 }}>
                 <input
                     type="text"
@@ -129,10 +153,8 @@ export default function Paginacion({ page, totalPages, onPageChange }) {
                     value={inputPage}
                     onChange={(e) => {
                         const value = e.target.value;
-
                         if (/^\d*$/.test(value)) {
                             const num = parseInt(value, 10);
-
                             if (value === "" || (num >= 1 && num <= totalPages)) {
                                 setInputPage(value);
                             }
@@ -143,25 +165,24 @@ export default function Paginacion({ page, totalPages, onPageChange }) {
                         padding: "6px",
                         borderRadius: "4px",
                         width: "90px",
-                        border: "1px solid #444",
-                        backgroundColor: "#1c1c1c",
-                        color: "#f0f0f0",
+                        border: "1px solid var(--color-border)",
+                        backgroundColor: "var(--color-bg)",
+                        color: "var(--color-text)",
                     }}
                     onKeyDown={(e) => {
-                        if (e.key === "Enter") {
-                            handleGo();
-                        }
+                        if (e.key === "Enter") handleGo();
                     }}
                     aria-label="Ingresar número de página"
                 />
+
                 <button
                     onClick={handleGo}
                     style={{
                         marginLeft: "8px",
                         padding: "6px 12px",
-                        backgroundColor: "#333",
-                        color: "#f0f0f0",
-                        border: "none",
+                        backgroundColor: "var(--color-primary)",
+                        color: "white",
+                        border: "1px solid var(--color-primary-dark)",
                         borderRadius: "4px",
                         cursor: "pointer",
                     }}
@@ -172,3 +193,4 @@ export default function Paginacion({ page, totalPages, onPageChange }) {
         </div>
     );
 }
+

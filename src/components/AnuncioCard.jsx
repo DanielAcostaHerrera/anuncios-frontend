@@ -20,10 +20,11 @@ export default function AnuncioCard({ anuncio, showToast, from }) {
   return (
     <div
       style={{
-        border: "1px solid #2a2a2a",
+        border: "1px solid var(--color-border)",
         borderRadius: 6,
         overflow: "hidden",
-        backgroundColor: "#1e1e1e",
+        backgroundColor: "var(--color-bg)",         // azul suave
+        boxShadow: "0 2px 6px rgba(0,0,0,0.15)",    // sombra clara
       }}
     >
       <Link
@@ -37,9 +38,9 @@ export default function AnuncioCard({ anuncio, showToast, from }) {
           style={{
             width: "100%",
             height: 180,
-            objectFit: "fill",
-            backgroundColor: "#000",
-            transition: "transform 0.2s, boxShadow 0.2s",
+            objectFit: "cover",
+            backgroundColor: "var(--color-bg-alt)",  // azul clarito
+            transition: "transform 0.2s, box-shadow 0.2s",
             display: "block",
           }}
           loading="lazy"
@@ -49,8 +50,9 @@ export default function AnuncioCard({ anuncio, showToast, from }) {
           style={{
             margin: 8,
             fontSize: 15,
-            color: "#f0f0f0",
+            color: "var(--color-text)",              // texto azul oscuro
             textAlign: "center",
+            fontWeight: 600,
           }}
         >
           {anuncio.Titulo}
@@ -69,7 +71,7 @@ export default function AnuncioCard({ anuncio, showToast, from }) {
                 style={{
                   margin: 8,
                   fontSize: 14,
-                  color: "#ccc",
+                  color: "var(--color-text-light)",   // texto secundario azul
                   textAlign: "center",
                 }}
               >
@@ -93,13 +95,23 @@ export default function AnuncioCard({ anuncio, showToast, from }) {
           <Mutation mutation={ELIMINAR_ANUNCIO}>
             {(eliminarAnuncio) => (
               <>
+                {/* Botón editar */}
                 <button
                   onClick={handleEdit}
                   className="admin-edit-btn"
+                  style={{
+                    backgroundColor: "var(--color-primary)",
+                    color: "white",
+                    border: "1px solid var(--color-primary-dark)",
+                    borderRadius: 6,
+                    padding: "6px 10px",
+                    cursor: "pointer",
+                  }}
                 >
                   ✏️
                 </button>
 
+                {/* Botón eliminar */}
                 <button
                   onClick={async () => {
                     console.log("anuncio.Fotos =", anuncio.Fotos);
@@ -110,7 +122,6 @@ export default function AnuncioCard({ anuncio, showToast, from }) {
                       const tieneFoto = anuncio.Fotos && anuncio.Fotos.trim() !== "";
 
                       if (tieneFoto) {
-
                         const fotoRes = await fetch(
                           "https://anuncios-backend.onrender.com/upload/image",
                           {
@@ -143,10 +154,17 @@ export default function AnuncioCard({ anuncio, showToast, from }) {
                     }
                   }}
                   className="admin-delete-btn"
+                  style={{
+                    backgroundColor: "#e74c3c",        // rojo claro
+                    color: "white",
+                    border: "1px solid #c0392b",
+                    borderRadius: 6,
+                    padding: "6px 10px",
+                    cursor: "pointer",
+                  }}
                 >
                   🗑️
                 </button>
-
               </>
             )}
           </Mutation>
@@ -155,6 +173,7 @@ export default function AnuncioCard({ anuncio, showToast, from }) {
     </div>
   );
 }
+
 
 
 

@@ -154,118 +154,176 @@ export default function EditarAnuncio({ showToast }) {
     }, [anuncioBD]);
 
     return (
-      <Query query={GET_ANUNCIO} variables={{ Id: Number(id) }}>
-        {({ loading, error, data }) => {
-          if (loading) return <p>Cargando anuncio…</p>;
-          if (error) return <p>Error cargando anuncio</p>;
+  <Query query={GET_ANUNCIO} variables={{ Id: Number(id) }}>
+    {({ loading, error, data }) => {
+      if (loading) return <p>Cargando anuncio…</p>;
+      if (error) return <p>Error cargando anuncio</p>;
 
-          const anuncio = data.anuncio;
+      const anuncio = data.anuncio;
 
-          // Cargar anuncio en estado cuando llegue (SIN setState dentro del render)
-          if (!anuncioBD && anuncio) {
-            // Guardar anuncio en un microtask para evitar el error
-            Promise.resolve().then(() => {
-              setAnuncioBD(anuncio);
-            });
-       }
-        return (
-          <div className="detalle-wrapper">
-            <h2 className="detalle-titulo">Editar Anuncio</h2>
+      if (!anuncioBD && anuncio) {
+        Promise.resolve().then(() => setAnuncioBD(anuncio));
+      }
 
-            <div className="detalle-container">
-              {/* Foto */}
-              <div className="detalle-portada insertar-portada">
-                <label>Foto del anuncio:</label>
+      return (
+        <div
+          className="detalle-wrapper"
+          style={{
+            backgroundColor: "var(--color-bg)",
+            padding: 20,
+            borderRadius: 10,
+            border: "1px solid var(--color-border)",
+            display: "flex",
+            flexDirection: "column",
+            gap: 20
+          }}
+        >
+          <h2 className="detalle-titulo">Editar Anuncio</h2>
 
-                {/* Foto actual */}
-                {FotoActual && (
-                  <img
-                    src={FotoActual}
-                    alt="Foto actual"
-                    style={{
-                      width: "100%",
-                      maxHeight: 250,
-                      objectFit: "cover",
-                      marginBottom: 10,
-                      borderRadius: 6,
-                    }}
-                  />
-                )}
+          {/* CONTENEDOR PRINCIPAL */}
+          <div
+            className="detalle-container"
+            style={{
+              backgroundColor: "var(--color-bg)",
+              padding: 15,
+              borderRadius: 10,
+              border: "1px solid var(--color-border)",
+              display: "flex",
+              gap: 20
+            }}
+          >
+            {/* FOTO */}
+            <div className="detalle-portada insertar-portada" style={{ flex: 1 }}>
+              <label>Foto del anuncio:</label>
 
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={(e) => setFileSeleccionado(e.target.files[0])}
-                />
-              </div>
-
-              <div className="detalle-info">
-                <label>Título *</label>
-                <input
-                  className="input-dark"
-                  value={Titulo}
-                  onChange={(e) => setTitulo(e.target.value)}
-                />
-
-                <label>Precio *</label>
-                <input
-                  className="input-dark"
-                  type="number"
-                  value={Precio}
-                  onChange={(e) => setPrecio(e.target.value)}
-                />
-
-                <label>Moneda *</label>
-                <Query query={GET_MONEDAS}>
-                  {({ loading, error, data }) => {
-                    if (loading) return <p>Cargando monedas…</p>;
-                    if (error) return <p>Error cargando monedas</p>;
-
-                    return (
-                      <select
-                        className="input-dark"
-                        value={Moneda}
-                        onChange={(e) => setMoneda(e.target.value)}
-                      >
-                        <option value="">Seleccione moneda</option>
-                        {data.monedas.map((m) => (
-                          <option key={m.Id} value={m.Id}>
-                            {m.nombre}
-                          </option>
-                        ))}
-                      </select>
-                    );
+              {FotoActual && (
+                <img
+                  src={FotoActual}
+                  alt="Foto actual"
+                  style={{
+                    width: "100%",
+                    maxHeight: 250,
+                    objectFit: "cover",
+                    marginBottom: 10,
+                    borderRadius: 6,
+                    border: "1px solid var(--color-border)"
                   }}
-                </Query>
+                />
+              )}
 
-                {/* Categoría */}
-                <label>Categoría</label>
-                <Query query={GET_CATEGORIAS}>
-                  {({ loading, error, data }) => {
-                    if (loading) return <p>Cargando categorías…</p>;
-                    if (error) return <p>Error cargando categorías</p>;
-                    return (
-                      <select
-                        className="input-dark"
-                        value={Categoria}
-                        onChange={(e) => {
-                          setCategoria(e.target.value);
-                          setSubcategoria("");
-                        }}
-                      >
-                        <option value="">Seleccione categoría</option>
-                        {data.categorias.map((c) => (
-                          <option key={c.Id} value={c.Id}>
-                            {c.nombre}
-                          </option>
-                        ))}
-                      </select>
-                    );
-                  }}
-                </Query>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={(e) => setFileSeleccionado(e.target.files[0])}
+                style={{
+                  backgroundColor: "#fff",
+                  border: "1px solid var(--color-border)",
+                  padding: 8,
+                  borderRadius: 6,
+                  width: "100%"
+                }}
+              />
+            </div>
 
-                {/* Subcategoría */}
-                <>
+            {/* INFORMACIÓN */}
+            <div
+              className="detalle-info"
+              style={{ flex: 2, display: "flex", flexDirection: "column", gap: 10 }}
+            >
+              <label>Título *</label>
+              <input
+                className="input-dark"
+                value={Titulo}
+                onChange={(e) => setTitulo(e.target.value)}
+                style={{
+                  backgroundColor: "#fff",
+                  border: "1px solid var(--color-border)",
+                  color: "var(--color-text)",
+                  padding: 8,
+                  borderRadius: 6
+                }}
+              />
+
+              <label>Precio *</label>
+              <input
+                className="input-dark"
+                type="number"
+                value={Precio}
+                onChange={(e) => setPrecio(e.target.value)}
+                style={{
+                  backgroundColor: "#fff",
+                  border: "1px solid var(--color-border)",
+                  color: "var(--color-text)",
+                  padding: 8,
+                  borderRadius: 6
+                }}
+              />
+
+              <label>Moneda *</label>
+              <Query query={GET_MONEDAS}>
+                {({ loading, error, data }) => {
+                  if (loading) return <p>Cargando monedas…</p>;
+                  if (error) return <p>Error cargando monedas</p>;
+
+                  return (
+                    <select
+                      className="input-dark"
+                      value={Moneda}
+                      onChange={(e) => setMoneda(e.target.value)}
+                      style={{
+                        backgroundColor: "#fff",
+                        border: "1px solid var(--color-border)",
+                        color: "var(--color-text)",
+                        padding: 8,
+                        borderRadius: 6
+                      }}
+                    >
+                      <option value="">Seleccione moneda</option>
+                      {data.monedas.map((m) => (
+                        <option key={m.Id} value={m.Id}>
+                          {m.nombre}
+                        </option>
+                      ))}
+                    </select>
+                  );
+                }}
+              </Query>
+
+              {/* Categoría */}
+              <label>Categoría</label>
+              <Query query={GET_CATEGORIAS}>
+                {({ loading, error, data }) => {
+                  if (loading) return <p>Cargando categorías…</p>;
+                  if (error) return <p>Error cargando categorías</p>;
+                  return (
+                    <select
+                      className="input-dark"
+                      value={Categoria}
+                      onChange={(e) => {
+                        setCategoria(e.target.value);
+                        setSubcategoria("");
+                      }}
+                      style={{
+                        backgroundColor: "#fff",
+                        border: "1px solid var(--color-border)",
+                        color: "var(--color-text)",
+                        padding: 8,
+                        borderRadius: 6
+                      }}
+                    >
+                      <option value="">Seleccione categoría</option>
+                      {data.categorias.map((c) => (
+                        <option key={c.Id} value={c.Id}>
+                          {c.nombre}
+                        </option>
+                      ))}
+                    </select>
+                  );
+                }}
+              </Query>
+
+              {/* Subcategoría */}
+              <>
                 <label>Subcategoría</label>
                 <Query
                   query={GET_SUBCATEGORIAS}
@@ -279,6 +337,13 @@ export default function EditarAnuncio({ showToast }) {
                         className="input-dark"
                         value={Subcategoria}
                         onChange={(e) => setSubcategoria(e.target.value)}
+                        style={{
+                          backgroundColor: "#fff",
+                          border: "1px solid var(--color-border)",
+                          color: "var(--color-text)",
+                          padding: 8,
+                          borderRadius: 6
+                        }}
                       >
                         <option value="">Seleccione subcategoría</option>
                         {data.subcategorias.map((s) => (
@@ -290,106 +355,164 @@ export default function EditarAnuncio({ showToast }) {
                     );
                   }}
                 </Query>
-              </>            
+              </>
 
-                {/* Provincia */}
-                <label>Provincia</label>
-                <Query query={GET_PROVINCIAS}>
+              {/* Provincia */}
+              <label>Provincia</label>
+              <Query query={GET_PROVINCIAS}>
+                {({ loading, error, data }) => {
+                  if (loading) return <p>Cargando provincias…</p>;
+                  if (error) return <p>Error cargando provincias</p>;
+                  return (
+                    <select
+                      className="input-dark"
+                      value={Provincia}
+                      onChange={(e) => {
+                        setProvincia(e.target.value);
+                        setMunicipio("");
+                      }}
+                      style={{
+                        backgroundColor: "#fff",
+                        border: "1px solid var(--color-border)",
+                        color: "var(--color-text)",
+                        padding: 8,
+                        borderRadius: 6
+                      }}
+                    >
+                      <option value="">Seleccione provincia</option>
+                      {data.provincias.map((p) => (
+                        <option key={p.Id} value={p.Id}>
+                          {p.nombre}
+                        </option>
+                      ))}
+                    </select>
+                  );
+                }}
+              </Query>
+
+              {/* Municipio */}
+              <>
+                <label>Municipio</label>
+                <Query
+                  query={GET_MUNICIPIOS}
+                  variables={{ IdProvincia: Number(Provincia) }}
+                >
                   {({ loading, error, data }) => {
-                    if (loading) return <p>Cargando provincias…</p>;
-                    if (error) return <p>Error cargando provincias</p>;
+                    if (loading) return <p>Cargando municipios…</p>;
+                    if (error) return <p>Error cargando municipios</p>;
                     return (
                       <select
                         className="input-dark"
-                        value={Provincia}
-                        onChange={(e) => {
-                          setProvincia(e.target.value);
-                          setMunicipio("");
+                        value={Municipio}
+                        onChange={(e) => setMunicipio(e.target.value)}
+                        style={{
+                          backgroundColor: "#fff",
+                          border: "1px solid var(--color-border)",
+                          color: "var(--color-text)",
+                          padding: 8,
+                          borderRadius: 6
                         }}
                       >
-                        <option value="">Seleccione provincia</option>
-                        {data.provincias.map((p) => (
-                          <option key={p.Id} value={p.Id}>
-                            {p.nombre}
+                        <option value="">Seleccione municipio</option>
+                        {data.municipios.map((m) => (
+                          <option key={m.Id} value={m.Id}>
+                            {m.nombre}
                           </option>
                         ))}
                       </select>
                     );
                   }}
                 </Query>
+              </>
+            </div>
+          </div>
 
-                {/* Municipio */}
-                  <>
-                    <label>Municipio</label>
-                    <Query
-                      query={GET_MUNICIPIOS}
-                      variables={{ IdProvincia: Number(Provincia) }}
-                    >
-                      {({ loading, error, data }) => {
-                        if (loading) return <p>Cargando municipios…</p>;
-                        if (error) return <p>Error cargando municipios</p>;
-                        return (
-                          <select
-                            className="input-dark"
-                            value={Municipio}
-                            onChange={(e) => setMunicipio(e.target.value)}
-                          >
-                            <option value="">Seleccione municipio</option>
-                            {data.municipios.map((m) => (
-                              <option key={m.Id} value={m.Id}>
-                                {m.nombre}
-                              </option>
-                            ))}
-                          </select>
-                        );
-                      }}
-                    </Query>
-                  </>
-              </div>
+          {/* DETALLE EXTRA — ME QUEDO AQUÍ COMO PEDISTE */}
+          <div
+            className="detalle-extra"
+            style={{
+              backgroundColor: "var(--color-bg)",
+              padding: 15,
+              borderRadius: 10,
+              border: "1px solid var(--color-border)",
+              display: "flex",
+              flexDirection: "column",
+              gap: 15
+            }}
+          >
+            <div className="detalle-card">
+              <strong>Descripción:</strong>
+              <textarea
+                className="input-dark"
+                rows={8}
+                value={Descripcion}
+                onChange={(e) => setDescripcion(e.target.value)}
+                style={{
+                  width: "100%",
+                  marginTop: 10,
+                  backgroundColor: "#fff",
+                  border: "1px solid var(--color-border)",
+                  color: "var(--color-text)",
+                  padding: 8,
+                  borderRadius: 6
+                }}
+              />
             </div>
 
-            <div className="detalle-extra">
-              <div className="detalle-card">
-                <strong>Descripción:</strong>
-                <textarea
-                  className="input-dark"
-                  rows={8}
-                  value={Descripcion}
-                  onChange={(e) => setDescripcion(e.target.value)}
-                  style={{ width: "100%", marginTop: 10 }}
-                />
-              </div>
-
-              <div className="detalle-card">
-                <strong>Nombre del anunciante:</strong>
-                <input
-                  className="input-dark"
-                  value={NombreAnunciante}
-                  onChange={(e) => setNombreAnunciante(e.target.value)}
-                  style={{ width: "100%", marginTop: 10 }}
-                />
-              </div>
-
-              <div className="detalle-card">
-                <strong>Celular:</strong>
-                <input
-                  className="input-dark"
-                  value={Celular}
-                  onChange={(e) => setCelular(e.target.value)}
-                  style={{ width: "100%", marginTop: 10 }}
-                />
-              </div>
-
-              <div className="detalle-card">
-                <strong>Teléfono fijo:</strong>
-                <input
-                  className="input-dark"
-                  value={Fijo}
-                  onChange={(e) => setFijo(e.target.value)}
-                  style={{ width: "100%", marginTop: 10 }}
-                />
-              </div>
+            <div className="detalle-card">
+              <strong>Nombre del anunciante:</strong>
+              <input
+                className="input-dark"
+                value={NombreAnunciante}
+                onChange={(e) => setNombreAnunciante(e.target.value)}
+                style={{
+                  width: "100%",
+                  marginTop: 10,
+                  backgroundColor: "#fff",
+                  border: "1px solid var(--color-border)",
+                  color: "var(--color-text)",
+                  padding: 8,
+                  borderRadius: 6
+                }}
+              />
             </div>
+
+            <div className="detalle-card">
+              <strong>Celular:</strong>
+              <input
+                className="input-dark"
+                value={Celular}
+                onChange={(e) => setCelular(e.target.value)}
+                style={{
+                  width: "100%",
+                  marginTop: 10,
+                  backgroundColor: "#fff",
+                  border: "1px solid var(--color-border)",
+                  color: "var(--color-text)",
+                  padding: 8,
+                  borderRadius: 6
+                }}
+              />
+            </div>
+
+            <div className="detalle-card">
+              <strong>Teléfono fijo:</strong>
+              <input
+                className="input-dark"
+                value={Fijo}
+                onChange={(e) => setFijo(e.target.value)}
+                style={{
+                  width: "100%",
+                  marginTop: 10,
+                  backgroundColor: "#fff",
+                  border: "1px solid var(--color-border)",
+                  color: "var(--color-text)",
+                  padding: 8,
+                  borderRadius: 6
+                }}
+              />
+            </div>
+          </div>
 
             {/* BOTÓN FINAL */}
               <Mutation mutation={ACTUALIZAR_ANUNCIO}>

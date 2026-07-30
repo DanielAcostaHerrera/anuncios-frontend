@@ -135,8 +135,21 @@ export default function CatalogoAnuncios({ showToast }) {
   };
 
   return (
-    <div className="catalogo-container">
-      <h2 style={{ color: "#f0f0f0", marginBottom: "20px", textAlign: "center" }}>
+    <div
+      className="catalogo-container"
+      style={{
+        backgroundColor: "var(--color-bg-alt)",   // azul clarito
+        padding: 20,
+        borderRadius: 10,
+      }}
+    >
+      <h2
+        style={{
+          color: "var(--color-text)",
+          marginBottom: "20px",
+          textAlign: "center"
+        }}
+      >
         Anuncios
       </h2>
 
@@ -144,6 +157,11 @@ export default function CatalogoAnuncios({ showToast }) {
         {auth.isLogged && (
           <button
             className="btn-dark"
+            style={{
+              backgroundColor: "var(--color-primary)",
+              color: "white",
+              border: `1px solid var(--color-primary-dark)`
+            }}
             onClick={() =>
               navigate("/insertar-anuncio", { state: { from: location.pathname } })
             }
@@ -156,31 +174,50 @@ export default function CatalogoAnuncios({ showToast }) {
       {/* Bloque principal */}
       <div
         className="filtros-grid"
-        style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}
+        style={{
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr",
+          gap: 12,
+          backgroundColor: "var(--color-bg)",   // azul más suave
+          padding: 15,
+          borderRadius: 10,
+        }}
       >
         {/* Título */}
         <div style={{ gridColumn: "1 / -1" }}>
-          <label style={{ color: "#f0f0f0" }}>Título</label>
+          <label style={{ color: "var(--color-text)" }}>Título</label>
           <input
             type="text"
             value={draftFiltros.titulo}
             onChange={(e) => handleChange("titulo", e.target.value)}
             className="filtro-input"
+            style={{
+              border: "1px solid var(--color-border)",
+              backgroundColor: "#fff",
+              color: "var(--color-text)"
+            }}
           />
         </div>
 
         {/* Moneda */}
         <div style={{ gridColumn: "1 / -1" }}>
-          <label style={{ color: "#f0f0f0" }}>Moneda</label>
+          <label style={{ color: "var(--color-text)" }}>Moneda</label>
           <Query query={GET_MONEDAS}>
             {({ loading, error, data }) => {
-              if (loading) return <p>Cargando monedas…</p>;
-              if (error) return <p>Error cargando monedas</p>;
+              if (loading)
+                return <p style={{ color: "var(--color-text)" }}>Cargando monedas…</p>;
+              if (error)
+                return <p style={{ color: "var(--color-text)" }}>Error cargando monedas</p>;
               return (
                 <select
                   value={draftFiltros.moneda}
                   onChange={(e) => handleChange("moneda", e.target.value)}
                   className="filtro-input"
+                  style={{
+                    border: "1px solid var(--color-border)",
+                    backgroundColor: "#fff",
+                    color: "var(--color-text)"
+                  }}
                 >
                   <option value="">Seleccione moneda</option>
                   {data.monedas.map((m) => (
@@ -198,24 +235,34 @@ export default function CatalogoAnuncios({ showToast }) {
         {draftFiltros.moneda !== "" && (
           <>
             <div>
-              <label style={{ color: "#f0f0f0" }}>Precio mínimo</label>
+              <label style={{ color: "var(--color-text)" }}>Precio mínimo</label>
               <input
                 type="text"
                 value={draftFiltros.precioMin}
                 onChange={(e) => handleChange("precioMin", e.target.value)}
                 onKeyDown={soloNumeros}
                 className="filtro-input"
+                style={{
+                  border: "1px solid var(--color-border)",
+                  backgroundColor: "#fff",
+                  color: "var(--color-text)"
+                }}
               />
             </div>
 
             <div>
-              <label style={{ color: "#f0f0f0" }}>Precio máximo</label>
+              <label style={{ color: "var(--color-text)" }}>Precio máximo</label>
               <input
                 type="text"
                 value={draftFiltros.precioMax}
                 onChange={(e) => handleChange("precioMax", e.target.value)}
                 onKeyDown={soloNumeros}
                 className="filtro-input"
+                style={{
+                  border: "1px solid var(--color-border)",
+                  backgroundColor: "#fff",
+                  color: "var(--color-text)"
+                }}
               />
             </div>
           </>
@@ -223,36 +270,54 @@ export default function CatalogoAnuncios({ showToast }) {
 
         {/* Fechas */}
         <div>
-          <label style={{ color: "#f0f0f0" }}>Fecha mínima</label>
+          <label style={{ color: "var(--color-text)" }}>Fecha mínima</label>
           <input
             type="date"
             value={draftFiltros.fechaMin}
             onChange={(e) => handleChange("fechaMin", e.target.value)}
             className="filtro-input"
+            style={{
+              border: "1px solid var(--color-border)",
+              backgroundColor: "#fff",
+              color: "var(--color-text)"
+            }}
           />
         </div>
+
         <div>
-          <label style={{ color: "#f0f0f0" }}>Fecha máxima</label>
+          <label style={{ color: "var(--color-text)" }}>Fecha máxima</label>
           <input
             type="date"
             value={draftFiltros.fechaMax}
             onChange={(e) => handleChange("fechaMax", e.target.value)}
             className="filtro-input"
+            style={{
+              border: "1px solid var(--color-border)",
+              backgroundColor: "#fff",
+              color: "var(--color-text)"
+            }}
           />
         </div>
 
-         {/* Categoría + Subcategoría */}
+        {/* Categoría + Subcategoría */}
         <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-          <label style={{ color: "#f0f0f0" }}>Categoría</label>
+          <label style={{ color: "var(--color-text)" }}>Categoría</label>
           <Query query={GET_CATEGORIAS}>
             {({ loading, error, data }) => {
-              if (loading) return <p>Cargando categorías…</p>;
-              if (error) return <p>Error cargando categorías</p>;
+              if (loading)
+                return <p style={{ color: "var(--color-text)" }}>Cargando categorías…</p>;
+              if (error)
+                return <p style={{ color: "var(--color-text)" }}>Error cargando categorías</p>;
               return (
                 <select
                   value={draftFiltros.categoria}
                   onChange={(e) => handleChange("categoria", e.target.value)}
                   className="filtro-input"
+                  style={{
+                    border: "1px solid var(--color-border)",
+                    backgroundColor: "#fff",
+                    color: "var(--color-text)"
+                  }}
                 >
                   <option value="">Todas las categorías</option>
                   {data.categorias.map((c) => (
@@ -267,19 +332,26 @@ export default function CatalogoAnuncios({ showToast }) {
 
           {draftFiltros.categoria && (
             <>
-              <label style={{ color: "#f0f0f0" }}>Subcategoría</label>
+              <label style={{ color: "var(--color-text)" }}>Subcategoría</label>
               <Query
                 query={GET_SUBCATEGORIAS}
                 variables={{ IdCategoria: parseInt(draftFiltros.categoria) }}
               >
                 {({ loading, error, data }) => {
-                  if (loading) return <p>Cargando subcategorías…</p>;
-                  if (error) return <p>Error cargando subcategorías</p>;
+                  if (loading)
+                    return <p style={{ color: "var(--color-text)" }}>Cargando subcategorías…</p>;
+                  if (error)
+                    return <p style={{ color: "var(--color-text)" }}>Error cargando subcategorías</p>;
                   return (
                     <select
                       value={draftFiltros.subcategoria}
                       onChange={(e) => handleChange("subcategoria", e.target.value)}
                       className="filtro-input"
+                      style={{
+                        border: "1px solid var(--color-border)",
+                        backgroundColor: "#fff",
+                        color: "var(--color-text)"
+                      }}
                     >
                       <option value="">Todas las subcategorías</option>
                       {data.subcategorias.map((s) => (
@@ -297,16 +369,23 @@ export default function CatalogoAnuncios({ showToast }) {
 
         {/* Provincia + Municipio */}
         <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-          <label style={{ color: "#f0f0f0" }}>Provincia</label>
+          <label style={{ color: "var(--color-text)" }}>Provincia</label>
           <Query query={GET_PROVINCIAS}>
             {({ loading, error, data }) => {
-              if (loading) return <p>Cargando provincias…</p>;
-              if (error) return <p>Error cargando provincias</p>;
+              if (loading)
+                return <p style={{ color: "var(--color-text)" }}>Cargando provincias…</p>;
+              if (error)
+                return <p style={{ color: "var(--color-text)" }}>Error cargando provincias</p>;
               return (
                 <select
                   value={draftFiltros.provincia}
                   onChange={(e) => handleChange("provincia", e.target.value)}
                   className="filtro-input"
+                  style={{
+                    border: "1px solid var(--color-border)",
+                    backgroundColor: "#fff",
+                    color: "var(--color-text)"
+                  }}
                 >
                   <option value="">Todas las provincias</option>
                   {data.provincias.map((p) => (
@@ -321,19 +400,26 @@ export default function CatalogoAnuncios({ showToast }) {
 
           {draftFiltros.provincia && (
             <>
-              <label style={{ color: "#f0f0f0" }}>Municipio</label>
+              <label style={{ color: "var(--color-text)" }}>Municipio</label>
               <Query
                 query={GET_MUNICIPIOS}
                 variables={{ IdProvincia: parseInt(draftFiltros.provincia) }}
               >
                 {({ loading, error, data }) => {
-                  if (loading) return <p>Cargando municipios…</p>;
-                  if (error) return <p>Error cargando municipios</p>;
+                  if (loading)
+                    return <p style={{ color: "var(--color-text)" }}>Cargando municipios…</p>;
+                  if (error)
+                    return <p style={{ color: "var(--color-text)" }}>Error cargando municipios</p>;
                   return (
                     <select
                       value={draftFiltros.municipio}
                       onChange={(e) => handleChange("municipio", e.target.value)}
                       className="filtro-input"
+                      style={{
+                        border: "1px solid var(--color-border)",
+                        backgroundColor: "#fff",
+                        color: "var(--color-text)"
+                      }}
                     >
                       <option value="">Todos los municipios</option>
                       {data.municipios.map((m) => (
@@ -351,19 +437,38 @@ export default function CatalogoAnuncios({ showToast }) {
       </div>
 
       {/* Botones de acción */}
-        <div style={{ marginTop: "20px", marginBottom: "25px", display: "flex", gap: 10 }}>
-          <button className="btn-dark" onClick={aplicarFiltros}>
-            Buscar
-          </button>
-          <button className="btn-dark" onClick={reiniciarCatalogo}>
-            Limpiar Filtros
-          </button>
-        </div>
+      <div style={{ marginTop: "20px", marginBottom: "25px", display: "flex", gap: 10 }}>
+        <button
+          className="btn-dark"
+          style={{
+            backgroundColor: "var(--color-primary)",
+            color: "white",
+            border: `1px solid var(--color-primary-dark)`
+          }}
+          onClick={aplicarFiltros}
+        >
+          Buscar
+        </button>
+
+        <button
+          className="btn-dark"
+          style={{
+            backgroundColor: "var(--color-primary)",
+            color: "white",
+            border: `1px solid var(--color-primary-dark)`
+          }}
+          onClick={reiniciarCatalogo}
+        >
+          Limpiar Filtros
+        </button>
+      </div>
 
       <Query query={query} variables={variables} fetchPolicy="network-only">
         {({ loading, error, data }) => {
-          if (loading) return <p style={{ color: "#ccc" }}>Cargando…</p>;
-          if (error) return <p style={{ color: "red" }}>Error: {error.message}</p>;
+          if (loading)
+            return <p style={{ color: "var(--color-text-light)" }}>Cargando…</p>;
+          if (error)
+            return <p style={{ color: "red" }}>Error: {error.message}</p>;
 
           const anuncios =
             data?.anuncios?.anuncios || data?.filtrarAnuncios?.anuncios || [];
@@ -377,7 +482,7 @@ export default function CatalogoAnuncios({ showToast }) {
                 style={{
                   display: "grid",
                   gridTemplateColumns: "repeat(auto-fill, minmax(200px, 1fr))",
-                  gap: "20px",
+                  gap: "20px"
                 }}
               >
                 {anuncios.map((a) => (
@@ -397,7 +502,7 @@ export default function CatalogoAnuncios({ showToast }) {
                   setPage(p);
                   const params = {
                     ...Object.fromEntries(searchParams.entries()),
-                    page: p,
+                    page: p
                   };
                   setSearchParams(params);
                 }}

@@ -112,26 +112,61 @@ const construirPayload = () => {
 
 
   return (
-    <div className="detalle-wrapper">
+    <div
+      className="detalle-wrapper"
+      style={{
+        backgroundColor: "var(--color-bg)",
+        padding: 20,
+        borderRadius: 10,
+        border: "1px solid var(--color-border)",
+        display: "flex",
+        flexDirection: "column",
+        gap: 20
+      }}
+    >
       <h2 className="detalle-titulo">Añadir Nuevo Anuncio</h2>
 
-      <div className="detalle-container">
+      <div
+        className="detalle-container"
+        style={{
+          backgroundColor: "var(--color-bg)",
+          padding: 15,
+          borderRadius: 10,
+          border: "1px solid var(--color-border)",
+          display: "flex",
+          gap: 20
+        }}
+      >
         {/* Foto */}
-        <div className="detalle-portada insertar-portada">
+        <div className="detalle-portada insertar-portada" style={{ flex: 1 }}>
           <label>Foto del anuncio:</label>
           <input
             type="file"
             accept="image/*"
             onChange={(e) => setFileSeleccionado(e.target.files[0])}
+            style={{
+              backgroundColor: "#fff",
+              border: "1px solid var(--color-border)",
+              padding: 8,
+              borderRadius: 6,
+              width: "100%"
+            }}
           />
         </div>
 
-        <div className="detalle-info">
+        <div className="detalle-info" style={{ flex: 2, display: "flex", flexDirection: "column", gap: 10 }}>
           <label>Título *</label>
           <input
             className="input-dark"
             value={Titulo}
             onChange={(e) => setTitulo(e.target.value)}
+            style={{
+              backgroundColor: "#fff",
+              border: "1px solid var(--color-border)",
+              color: "var(--color-text)",
+              padding: 8,
+              borderRadius: 6
+            }}
           />
 
           <label>Precio *</label>
@@ -140,30 +175,44 @@ const construirPayload = () => {
             type="number"
             value={Precio}
             onChange={(e) => setPrecio(e.target.value)}
+            style={{
+              backgroundColor: "#fff",
+              border: "1px solid var(--color-border)",
+              color: "var(--color-text)",
+              padding: 8,
+              borderRadius: 6
+            }}
           />
 
           <label>Moneda *</label>
-            <Query query={GET_MONEDAS}>
-              {({ loading, error, data }) => {
-                if (loading) return <p>Cargando monedas…</p>;
-                if (error) return <p>Error cargando monedas</p>;
+          <Query query={GET_MONEDAS}>
+            {({ loading, error, data }) => {
+              if (loading) return <p>Cargando monedas…</p>;
+              if (error) return <p>Error cargando monedas</p>;
 
-                return (
-                  <select
-                    className="input-dark"
-                    value={Moneda}
-                    onChange={(e) => setMoneda(e.target.value)}
-                  >
-                    <option value="">Seleccione moneda</option>
-                    {data.monedas.map((m) => (
-                      <option key={m.Id} value={m.Id}>
-                        {m.nombre}
-                      </option>
-                    ))}
-                  </select>
-                );
-              }}
-            </Query>
+              return (
+                <select
+                  className="input-dark"
+                  value={Moneda}
+                  onChange={(e) => setMoneda(e.target.value)}
+                  style={{
+                    backgroundColor: "#fff",
+                    border: "1px solid var(--color-border)",
+                    color: "var(--color-text)",
+                    padding: 8,
+                    borderRadius: 6
+                  }}
+                >
+                  <option value="">Seleccione moneda</option>
+                  {data.monedas.map((m) => (
+                    <option key={m.Id} value={m.Id}>
+                      {m.nombre}
+                    </option>
+                  ))}
+                </select>
+              );
+            }}
+          </Query>
 
           {/* Categoría */}
           <label>Categoría</label>
@@ -178,6 +227,13 @@ const construirPayload = () => {
                   onChange={(e) => {
                     setCategoria(e.target.value);
                     setSubcategoria("");
+                  }}
+                  style={{
+                    backgroundColor: "#fff",
+                    border: "1px solid var(--color-border)",
+                    color: "var(--color-text)",
+                    padding: 8,
+                    borderRadius: 6
                   }}
                 >
                   <option value="">Seleccione categoría</option>
@@ -207,6 +263,13 @@ const construirPayload = () => {
                       className="input-dark"
                       value={Subcategoria}
                       onChange={(e) => setSubcategoria(e.target.value)}
+                      style={{
+                        backgroundColor: "#fff",
+                        border: "1px solid var(--color-border)",
+                        color: "var(--color-text)",
+                        padding: 8,
+                        borderRadius: 6
+                      }}
                     >
                       <option value="">Seleccione subcategoría</option>
                       {data.subcategorias.map((s) => (
@@ -234,6 +297,13 @@ const construirPayload = () => {
                   onChange={(e) => {
                     setProvincia(e.target.value);
                     setMunicipio("");
+                  }}
+                  style={{
+                    backgroundColor: "#fff",
+                    border: "1px solid var(--color-border)",
+                    color: "var(--color-text)",
+                    padding: 8,
+                    borderRadius: 6
                   }}
                 >
                   <option value="">Seleccione provincia</option>
@@ -263,6 +333,13 @@ const construirPayload = () => {
                       className="input-dark"
                       value={Municipio}
                       onChange={(e) => setMunicipio(e.target.value)}
+                      style={{
+                        backgroundColor: "#fff",
+                        border: "1px solid var(--color-border)",
+                        color: "var(--color-text)",
+                        padding: 8,
+                        borderRadius: 6
+                      }}
                     >
                       <option value="">Seleccione municipio</option>
                       {data.municipios.map((m) => (
@@ -279,7 +356,19 @@ const construirPayload = () => {
         </div>
       </div>
 
-      <div className="detalle-extra">
+      {/* EXTRA */}
+      <div
+        className="detalle-extra"
+        style={{
+          backgroundColor: "var(--color-bg)",
+          padding: 15,
+          borderRadius: 10,
+          border: "1px solid var(--color-border)",
+          display: "flex",
+          flexDirection: "column",
+          gap: 15
+        }}
+      >
         <div className="detalle-card">
           <strong>Descripción:</strong>
           <textarea
@@ -287,7 +376,15 @@ const construirPayload = () => {
             rows={8}
             value={Descripcion}
             onChange={(e) => setDescripcion(e.target.value)}
-            style={{ width: "100%", marginTop: 10 }}
+            style={{
+              width: "100%",
+              marginTop: 10,
+              backgroundColor: "#fff",
+              border: "1px solid var(--color-border)",
+              color: "var(--color-text)",
+              padding: 8,
+              borderRadius: 6
+            }}
           />
         </div>
 
@@ -297,7 +394,15 @@ const construirPayload = () => {
             className="input-dark"
             value={NombreAnunciante}
             onChange={(e) => setNombreAnunciante(e.target.value)}
-            style={{ width: "100%", marginTop: 10 }}
+            style={{
+              width: "100%",
+              marginTop: 10,
+              backgroundColor: "#fff",
+              border: "1px solid var(--color-border)",
+              color: "var(--color-text)",
+              padding: 8,
+              borderRadius: 6
+            }}
           />
         </div>
 
@@ -307,7 +412,15 @@ const construirPayload = () => {
             className="input-dark"
             value={Celular}
             onChange={(e) => setCelular(e.target.value)}
-            style={{ width: "100%", marginTop: 10 }}
+            style={{
+              width: "100%",
+              marginTop: 10,
+              backgroundColor: "#fff",
+              border: "1px solid var(--color-border)",
+              color: "var(--color-text)",
+              padding: 8,
+              borderRadius: 6
+            }}
           />
         </div>
 
@@ -317,62 +430,64 @@ const construirPayload = () => {
             className="input-dark"
             value={Fijo}
             onChange={(e) => setFijo(e.target.value)}
-            style={{ width: "100%", marginTop: 10 }}
+            style={{
+              width: "100%",
+              marginTop: 10,
+              backgroundColor: "#fff",
+              border: "1px solid var(--color-border)",
+              color: "var(--color-text)",
+              padding: 8,
+              borderRadius: 6
+            }}
           />
         </div>
       </div>
 
       {/* BOTÓN FINAL */}
-        <Mutation mutation={CREAR_ANUNCIO}>
-          {(crearAnuncio) => (
-            <button
-              className="btn-guardar"
-              onClick={async () => {
-                const payload = construirPayload();
-                if (!payload) return;
+      <Mutation mutation={CREAR_ANUNCIO}>
+        {(crearAnuncio) => (
+          <button
+            className="btn-guardar"
+            onClick={async () => {
+              const payload = construirPayload();
+              if (!payload) return;
 
-                try {
-                  // 1. Subir foto primero
-                  if (!fileSeleccionado) {
-                    showToast("Debe seleccionar una foto");
-                    return;
-                  }
-
-                  const fotoUrl = await subirFoto(fileSeleccionado, Titulo);
-
-                  if (!fotoUrl) {
-                    showToast("Error subiendo la foto");
-                    return;
-                  }
-
-                  // 2. Añadir la URL al payload
-                  payload.Fotos = fotoUrl;
-
-                  // 3. Crear anuncio con la foto incluida y refrescar queries
-                  const res = await crearAnuncio({
-                    variables: { data: payload },
-                    refetchQueries: [
-                      { query: GET_ANUNCIOS },
-                    ],
-                  });
-
-                  if (!res.data?.crearAnuncio) {
-                    showToast("No se pudo añadir el anuncio");
-                    return;
-                  }
-
-                  showToast("Anuncio añadido correctamente");
-                  navigate("/catalogo-anuncios");
-                } catch (err) {
-                  console.error(err);
-                  showToast("Error añadiendo el anuncio");
+              try {
+                if (!fileSeleccionado) {
+                  showToast("Debe seleccionar una foto");
+                  return;
                 }
-              }}
-            >
-              Añadir Anuncio
-            </button>
-          )}
-        </Mutation>
+
+                const fotoUrl = await subirFoto(fileSeleccionado, Titulo);
+                if (!fotoUrl) {
+                  showToast("Error subiendo la foto");
+                  return;
+                }
+
+                payload.Fotos = fotoUrl;
+
+                const res = await crearAnuncio({
+                  variables: { data: payload },
+                  refetchQueries: [{ query: GET_ANUNCIOS }],
+                });
+
+                if (!res.data?.crearAnuncio) {
+                  showToast("No se pudo añadir el anuncio");
+                  return;
+                }
+
+                showToast("Anuncio añadido correctamente");
+                navigate("/catalogo-anuncios");
+              } catch (err) {
+                console.error(err);
+                showToast("Error añadiendo el anuncio");
+              }
+            }}
+          >
+            Añadir Anuncio
+          </button>
+        )}
+      </Mutation>
     </div>
   );
 }

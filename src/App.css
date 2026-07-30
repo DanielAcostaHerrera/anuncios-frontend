@@ -1,11 +1,24 @@
 /* --------------------------------------------------
    GLOBAL
 -------------------------------------------------- */
+:root {
+  --color-bg: #e9f2ff;          /* fondo azul muy claro */
+  --color-bg-alt: #d7e8ff;      /* azul claro secundario */
+  --color-card: #ffffff;        /* tarjetas blancas */
+  --color-border: #bcd3f5;      /* borde azul suave */
+  --color-text: #0a1a33;        /* texto azul oscuro */
+  --color-text-light: #3a4d6b;  /* texto secundario */
+  --color-primary: #3a7afe;     /* azul principal */
+  --color-primary-dark: #2f63d6; /* azul hover */
+  --color-accent: #1e5bd8;      /* azul fuerte */
+}
+
 html,
 body {
   margin: 0;
   padding: 0;
-  background-color: #1e1e1e;
+  background-color: var(--color-bg);
+  color: var(--color-text);
   min-height: 100vh;
   width: 100%;
 }
@@ -14,7 +27,8 @@ body {
   width: 100%;
   margin: 0;
   padding: 0;
-  background-color: transparent;
+  background-color: var(--color-bg);
+  min-height: 100vh;
 }
 
 .carousel {
@@ -91,7 +105,7 @@ body {
 
 .brand-box h1 {
   font-weight: 600;
-  color: #f0f0f0;
+  color: var(--color-text);
   font-size: 2rem;
   margin: 0;
 }
@@ -104,17 +118,22 @@ body {
   height: 32px;
   padding: 6px;
   border-radius: 4px;
-  border: 1px solid #444;
-  background-color: #ffffff;
-  color: #000000;
+  border: 1px solid var(--color-border);
+  background-color: var(--color-card);
+  color: var(--color-text);
   box-sizing: border-box;
   font-size: 14px;
   line-height: 20px;
 }
 
+.filtro-input:focus {
+  border-color: var(--color-primary);
+  outline: none;
+}
+
 .filtro-sufijo {
   margin-left: 6px;
-  color: #ccc;
+  color: var(--color-text-light);
   line-height: 32px;
 }
 
@@ -130,10 +149,10 @@ body {
 }
 
 .btn-dark {
-  background: #2a2a2a;
+  background: var(--color-primary);
   padding: 8px 14px;
-  color: #f0f0f0;
-  border: 1px solid #444;
+  color: white;
+  border: 1px solid var(--color-primary-dark);
   border-radius: 6px;
   cursor: pointer;
   font-weight: 600;
@@ -141,7 +160,7 @@ body {
 }
 
 .btn-dark:hover {
-  background-color: #555;
+  background-color: var(--color-primary-dark);
   transform: scale(1.05);
 }
 
@@ -156,7 +175,7 @@ body {
 
 .detalle-titulo {
   text-align: center;
-  color: #f0f0f0;
+  color: var(--color-text);
   font-size: 28px;
   margin-bottom: 20px;
   margin-top: 10px;
@@ -164,8 +183,8 @@ body {
 }
 
 .detalle-container {
-  background-color: #1e1e1e;
-  color: #f0f0f0;
+  background-color: var(--color-card);
+  color: var(--color-text);
   padding: 0;
   display: flex;
   gap: 20px;
@@ -193,11 +212,12 @@ body {
 .detalle-info {
   flex: 1;
   min-width: 0;
-  background: #1a1a1a;
+  background: var(--color-card);          /* blanco */
   padding: 16px;
   border-radius: 10px;
-  border: 1px solid #2a2a2a;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  border: 1px solid var(--color-border);  /* azul suave */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15); /* sombra clara */
+  color: var(--color-text);               /* texto azul oscuro */
 }
 
 .detalle-extra {
@@ -209,12 +229,14 @@ body {
 }
 
 .detalle-card {
-  background: #1a1a1a;
+  background: var(--color-card);          /* blanco */
   padding: 16px;
   border-radius: 10px;
-  border: 1px solid #2a2a2a;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  border: 1px solid var(--color-border);  /* azul suave */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15); /* sombra clara */
+  color: var(--color-text);               /* texto azul oscuro */
 }
+
 
 /* --------------------------------------------------
    VER ANUNCIO
@@ -224,7 +246,7 @@ body {
   max-width: 600px;
   margin: 0 auto;
   padding: 20px;
-  color: white;
+  color: var(--color-text);
 }
 
 .ver-imagen img {
@@ -243,7 +265,7 @@ body {
   font-size: 24px;     
   font-weight: 400;    
   margin-bottom: 6px;
-  color: #f0f0f0;
+  color: var(--color-text);
 }
 
 .ver-precio {
@@ -252,7 +274,7 @@ body {
   font-weight: 700;    
   margin-top: -4px;
   margin-bottom: 16px;
-  color: #f0f0f0;
+  color: var(--color-text);
 }
 
 /* Bloque de fecha y ubicación */
@@ -260,12 +282,13 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #2a2a2a;
+  background: var(--color-bg-alt);
   padding: 10px 14px;
   border-radius: 6px;
   margin-bottom: 20px;
   font-size: 14px;
-  color: #ccc;
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
 }
 
 .ver-fecha {
@@ -274,7 +297,7 @@ body {
 
 .ver-ubicacion {
   font-weight: 600;
-  color: #f0f0f0;
+  color: var(--color-text);
 }
 
 /* Botones de contacto */
@@ -303,11 +326,13 @@ body {
   background-color: #007bff;
 }
 
-/* Descripción */
 .ver-descripcion {
-  background: #1a1a1a;
+  background: var(--color-card);          /* blanco */
   padding: 15px;
   border-radius: 8px;
+  border: 1px solid var(--color-border);  /* borde azul suave */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15); /* sombra clara */
+  color: var(--color-text);               /* texto azul oscuro */
 }
 
 .ver-descripcion h3 {
@@ -397,27 +422,26 @@ body {
 }
 
 .carrito-lista li {
-  background-color: #2a2a2a;
-  color: #f0f0f0;
+  background-color: var(--color-card);
+  color: var(--color-text);
   margin-bottom: 10px;
   padding: 10px;
   border-radius: 6px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  border: 1px solid var(--color-border);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
 }
 
 .carrito-lista button {
-  background-color: #444;
-  color: #fff;
-  border: none;
+  background-color: var(--color-primary);
+  color: white;
+  border: 1px solid var(--color-primary-dark);
   border-radius: 4px;
   padding: 6px 10px;
   cursor: pointer;
 }
 
 .carrito-lista button:hover {
-  background-color: #666;
+  background-color: var(--color-primary-dark);
 }
 
 .btns-carrito {
@@ -441,9 +465,9 @@ body {
 .btn-carrito,
 .btn-exportar {
   padding: 8px 12px;
-  background-color: #333;
-  color: #fff;
-  border: none;
+  background-color: var(--color-primary);
+  color: white;
+  border: 1px solid var(--color-primary-dark);
   border-radius: 6px;
   cursor: pointer;
   font-weight: 600;
@@ -453,13 +477,13 @@ body {
 .btn-add:hover,
 .btn-carrito:hover:not(:disabled),
 .btn-exportar:hover {
-  background-color: #555;
+  background-color: var(--color-primary-dark);
   transform: scale(1.05);
 }
 
 .btn-carrito:disabled {
-  background-color: #1a1a1a;
-  color: #777;
+  background-color: var(--color-bg-alt);
+  color: var(--color-text-light);
   cursor: not-allowed;
   opacity: 0.7;
   transform: none;
@@ -506,7 +530,7 @@ body {
 
   .header-title {
     font-weight: 600;
-    color: #f0f0f0;
+    color: var(--color-text);
     white-space: nowrap;
   }
 
@@ -521,7 +545,7 @@ body {
     justify-content: center;
     background: transparent;
     border: none;
-    color: #f0f0f0;
+    color: var(--color-text);
     font-size: 22px;
     line-height: 1;
     cursor: pointer;
@@ -563,34 +587,39 @@ body {
 /* --------------------------------------------------
    HEADER (MÓVIL)
 -------------------------------------------------- */
+/* --------------------------------------------------
+   HEADER (MÓVIL) — CORREGIDO
+-------------------------------------------------- */
 @media (max-width: 950px) {
   .site-header {
     position: static;
   }
 
   .header-container {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
+    flex-direction: row;          /* elementos en fila */
+    align-items: center;          /* alineados verticalmente */
+    justify-content: flex-start;  /* alineados a la izquierda */
+    text-align: left;             /* texto alineado a la izquierda */
     position: relative;
+    gap: 12px;
+    width: 100%;
   }
 
   .logo-box {
-    position: absolute;
-    transform: translateX(-100%);
-    top: 0;
-    left: calc(50% - 60px);
+    position: static;             /* sin posiciones raras */
+    transform: none;
+    margin: 0;
   }
 
   .title-box {
-    width: 100%;
-    text-align: center;
-    margin-bottom: 10px;
+    position: static;
+    text-align: left;             /* título alineado a la izquierda */
+    margin: 0;
   }
 
   .header-title {
     font-weight: 600;
-    color: #f0f0f0;
+    color: var(--color-text);
     white-space: nowrap;
   }
 
@@ -605,7 +634,7 @@ body {
     justify-content: center;
     background: transparent;
     border: none;
-    color: #f0f0f0;
+    color: var(--color-text);
     font-size: 22px;
     line-height: 1;
     cursor: pointer;
@@ -622,13 +651,13 @@ body {
     width: 100%;
     margin-top: 12px;
     gap: 10px;
-    text-align: center;
+    text-align: left;             /* también alineado a la izquierda */
   }
 
   .mobile-menu a,
   .mobile-menu button {
     width: 100%;
-    text-align: center;
+    text-align: left;             /* enlaces alineados a la izquierda */
   }
 
   .admin-lock-desktop {
@@ -671,16 +700,16 @@ body {
 }
 
 .selector-limit label {
-  color: #f0f0f0;
+  color: var(--color-text);
   font-size: 14px;
 }
 
 .selector-limit input {
   padding: 6px 10px;
   border-radius: 4px;
-  border: 1px solid #555;
-  background-color: #222;
-  color: #f0f0f0;
+  border: 1px solid var(--color-border);
+  background-color: var(--color-card);
+  color: var(--color-text);
   font-size: 14px;
   text-align: center;
   width: 80px;
@@ -689,7 +718,7 @@ body {
 
 .selector-limit input:focus {
   outline: none;
-  background-color: #333;
+  border-color: var(--color-primary);
 }
 
 /* --------------------------------------------------
@@ -703,7 +732,7 @@ body {
   width: 100%;
   height: 100%;
   backdrop-filter: blur(4px);
-  background: rgba(0, 0, 0, 0.55);
+  background: transparent;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -711,15 +740,16 @@ body {
 }
 
 .auth-modal {
-  background: #2b2b2b;
+  background: var(--color-card);
   padding: 25px 30px;
   border-radius: 10px;
   width: 320px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
   animation: authFadeIn 0.25s ease-out;
   display: flex;
   flex-direction: column;
   gap: 12px;
+  color: var(--color-text);
 }
 
 @keyframes authFadeIn {
@@ -738,7 +768,7 @@ body {
   margin: 0;
   margin-bottom: 10px;
   text-align: center;
-  color: #fff;
+  color: var(--color-text);
   font-size: 20px;
   font-weight: 600;
 }
@@ -746,17 +776,43 @@ body {
 .auth-input {
   width: 100%;
   padding: 10px 12px;
+  padding-right: 35px;
   border-radius: 6px;
-  border: 1px solid #444;
-  background: #1e1e1e;
-  color: #fff;
+  border: 1px solid var(--color-border);
+  background: var(--color-card);
+  color: var(--color-text);
   font-size: 14px;
   outline: none;
   transition: border-color 0.2s;
+  box-sizing: border-box; 
 }
 
 .auth-input:focus {
-  border-color: #3a7afe;
+  border-color: var(--color-primary);
+}
+
+/* 🔥 Corrección: contenedor para que el input de contraseña no se salga */
+.auth-input-container {
+  position: relative;
+  width: 100%;
+}
+
+/* 🔥 Corrección: evita que el padding del icono aumente el ancho del input */
+.auth-input-pass {
+  padding-right: 35px;
+  box-sizing: border-box;
+}
+
+/* 🔥 Icono de mostrar/ocultar contraseña */
+.auth-input-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #ccc;
+  font-size: 18px;
+  user-select: none;
 }
 
 .auth-error {
@@ -770,7 +826,7 @@ body {
 .auth-btn-login {
   width: 100%;
   padding: 10px;
-  background: #3a7afe;
+  background: var(--color-primary);
   border: none;
   border-radius: 6px;
   color: white;
@@ -781,23 +837,23 @@ body {
 }
 
 .auth-btn-login:hover {
-  background: #2f63d6;
+  background: var(--color-primary-dark);
 }
 
 .auth-btn-cancel {
   width: 100%;
   padding: 10px;
-  background: #555;
+  background: var(--color-bg-alt);
   border: none;
   border-radius: 6px;
-  color: white;
+  color: var(--color-text);
   font-size: 14px;
   cursor: pointer;
   transition: background 0.2s;
 }
 
 .auth-btn-cancel:hover {
-  background: #666;
+  background: var(--color-border);
 }
 
 .admin-edit-btn,
@@ -811,8 +867,9 @@ body {
 }
 
 .admin-edit-btn {
-  background: #3a3a3a;
+  background: var(--color-primary);
   color: white;
+  border: 1px solid var(--color-primary-dark);
 }
 
 .admin-edit-btn:hover {
@@ -821,8 +878,9 @@ body {
 }
 
 .admin-delete-btn {
-  background: #7a1f1f;
+  background: #e74c3c;
   color: white;
+  border: 1px solid #c0392b;
 }
 
 .admin-delete-btn:hover {
@@ -841,7 +899,7 @@ body {
   border-radius: 4px;
   border: 1px solid #444;
   background-color: #111;
-  color: #f0f0f0;
+  color: var(--color-text);
   font-size: 14px;
   box-sizing: border-box;
 }
@@ -855,22 +913,28 @@ textarea.input-dark {
   resize: vertical;
 }
 
-/* ====== Botón oscuro genérico (Guardar Cambios, etc.) ====== */
+/* ====== Botón claro genérico (Guardar Cambios, etc.) ====== */
 
 .btn-guardar {
   margin-top: 20px;
   padding: 10px 20px;
-  background-color: #1e1e1e;
-  color: #f0f0f0;
-  border: 1px solid #444;
-  border-radius: 4px;
+  background-color: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: 6px;
   font-size: 15px;
   cursor: pointer;
+  font-weight: 600;
+
+  display: inline-block;        /* 🔥 evita que ocupe todo el ancho */
+  width: auto !important;       /* 🔥 fuerza ancho según contenido */
+  align-self: flex-start;       /* 🔥 si el contenedor es flex, lo pega a la izquierda */
+
   transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
 .btn-guardar:hover {
-  background-color: #2a2a2a;
+  background-color: var(--color-primary-dark);
   transform: translateY(-1px);
 }
 

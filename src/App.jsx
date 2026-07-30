@@ -18,8 +18,8 @@ function AppContent() {
   return (
     <div
       style={{
-        backgroundColor: "#1e1e1e",
-        color: "#f0f0f0",
+        backgroundColor: "var(--color-bg-alt)",   // ✔ mismo azul que CatalogoAnuncios
+        color: "var(--color-text)",               // ✔ texto azul oscuro
         minHeight: "100vh",
         width: "100%",
         fontFamily: "Segoe UI, sans-serif",
