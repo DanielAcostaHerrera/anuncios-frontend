@@ -7,6 +7,7 @@ import {
   GET_SUBCATEGORIAS,
   GET_PROVINCIAS,
   GET_MUNICIPIOS,
+  GET_MONEDAS,
 } from "../graphql";
 import AnuncioCard from "../components/AnuncioCard";
 import Paginacion from "../components/Paginacion";
@@ -26,6 +27,7 @@ export default function CatalogoAnuncios({ showToast }) {
   // Filtros definitivos (los que se usan en la query)
   const [filtros, setFiltros] = useState({
     titulo: searchParams.get("titulo") || "",
+    moneda: searchParams.get("moneda") || "", 
     precioMin: searchParams.get("precioMin") || "",
     precioMax: searchParams.get("precioMax") || "",
     provincia: searchParams.get("provincia") || "",
@@ -86,6 +88,7 @@ export default function CatalogoAnuncios({ showToast }) {
 
   const query =
     filtros.titulo ||
+    filtros.moneda || 
     filtros.precioMin ||
     filtros.precioMax ||
     filtros.provincia ||
@@ -101,6 +104,7 @@ export default function CatalogoAnuncios({ showToast }) {
     page,
     limit,
     titulo: filtros.titulo || null,
+    moneda: filtros.moneda !== "" ? parseInt(filtros.moneda) : undefined,
     precioMin: filtros.precioMin !== "" ? parseInt(filtros.precioMin) : undefined,
     precioMax: filtros.precioMax !== "" ? parseInt(filtros.precioMax) : undefined,
     provincia: filtros.provincia !== "" ? parseInt(filtros.provincia) : undefined,
@@ -114,6 +118,7 @@ export default function CatalogoAnuncios({ showToast }) {
   const reiniciarCatalogo = () => {
     const reset = {
       titulo: "",
+      moneda: "", 
       precioMin: "",
       precioMax: "",
       provincia: "",
@@ -164,27 +169,57 @@ export default function CatalogoAnuncios({ showToast }) {
           />
         </div>
 
-        {/* Precios */}
-        <div>
-          <label style={{ color: "#f0f0f0" }}>Precio mínimo</label>
-          <input
-            type="text"
-            value={draftFiltros.precioMin}
-            onChange={(e) => handleChange("precioMin", e.target.value)}
-            onKeyDown={soloNumeros}
-            className="filtro-input"
-          />
+        {/* Moneda */}
+        <div style={{ gridColumn: "1 / -1" }}>
+          <label style={{ color: "#f0f0f0" }}>Moneda</label>
+          <Query query={GET_MONEDAS}>
+            {({ loading, error, data }) => {
+              if (loading) return <p>Cargando monedas…</p>;
+              if (error) return <p>Error cargando monedas</p>;
+              return (
+                <select
+                  value={draftFiltros.moneda}
+                  onChange={(e) => handleChange("moneda", e.target.value)}
+                  className="filtro-input"
+                >
+                  <option value="">Seleccione moneda</option>
+                  {data.monedas.map((m) => (
+                    <option key={m.Id} value={m.Id}>
+                      {m.nombre}
+                    </option>
+                  ))}
+                </select>
+              );
+            }}
+          </Query>
         </div>
-        <div>
-          <label style={{ color: "#f0f0f0" }}>Precio máximo</label>
-          <input
-            type="text"
-            value={draftFiltros.precioMax}
-            onChange={(e) => handleChange("precioMax", e.target.value)}
-            onKeyDown={soloNumeros}
-            className="filtro-input"
-          />
-        </div>
+
+        {/* Precios (solo si hay moneda) */}
+        {draftFiltros.moneda !== "" && (
+          <>
+            <div>
+              <label style={{ color: "#f0f0f0" }}>Precio mínimo</label>
+              <input
+                type="text"
+                value={draftFiltros.precioMin}
+                onChange={(e) => handleChange("precioMin", e.target.value)}
+                onKeyDown={soloNumeros}
+                className="filtro-input"
+              />
+            </div>
+
+            <div>
+              <label style={{ color: "#f0f0f0" }}>Precio máximo</label>
+              <input
+                type="text"
+                value={draftFiltros.precioMax}
+                onChange={(e) => handleChange("precioMax", e.target.value)}
+                onKeyDown={soloNumeros}
+                className="filtro-input"
+              />
+            </div>
+          </>
+        )}
 
         {/* Fechas */}
         <div>

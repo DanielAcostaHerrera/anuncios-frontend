@@ -240,19 +240,19 @@ body {
 /* Título y precio */
 .ver-titulo {
   text-align: left;
-  font-size: 28px;
-  font-weight: 700;
+  font-size: 24px;     
+  font-weight: 400;    
   margin-bottom: 6px;
   color: #f0f0f0;
 }
 
 .ver-precio {
   text-align: left;
-  font-size: 20px;       /* un poco más pequeño que el título */
-  font-weight: 600;      /* negrito */
-  margin-top: -4px;      /* más cerca del título */
-  margin-bottom: 16px;   /* espacio antes del bloque siguiente */
-  color: #f0f0f0;        /* mismo color que el texto, sin verde */
+  font-size: 24px;     
+  font-weight: 700;    
+  margin-top: -4px;
+  margin-bottom: 16px;
+  color: #f0f0f0;
 }
 
 /* Bloque de fecha y ubicación */

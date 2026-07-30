@@ -29,7 +29,7 @@ export default function AnuncioDetalles() {
           window.open(url, "_blank");
         };
 
-        // Normalizar número fijo
+        // Normalizar número fijo (pero ya NO se usa para llamar)
         let fijo = a.Fijo?.toString().replace(/\D/g, "") || "";
         if (fijo && !fijo.startsWith("53")) {
           fijo = "53" + fijo;
@@ -99,17 +99,16 @@ export default function AnuncioDetalles() {
                 </button>
               )}
 
-              {/* Teléfono fijo */}
+              {/* Teléfono fijo — YA NO ES CLICKEABLE */}
               {a.Fijo && (
-                <a className="btn-llamar" href={`tel:+${fijo}`}>
-                  ☎️ Llamar: {a.Fijo}
-                </a>
+                <div className="btn-llamar" style={{ cursor: "default" }}>
+                  ☎️ Fijo: {a.Fijo}
+                </div>
               )}
             </div>
 
             {/* Descripción */}
             <div className="ver-descripcion">
-              <h3>Descripción</h3>
               <p>{a.Descripcion}</p>
             </div>
 

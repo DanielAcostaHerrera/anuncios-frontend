@@ -53,6 +53,7 @@ export const FILTRAR_ANUNCIOS = gql`
     $page: Int!
     $limit: Int!
     $titulo: String
+    $moneda: Int
     $precioMin: Float
     $precioMax: Float
     $provincia: Int
@@ -66,6 +67,7 @@ export const FILTRAR_ANUNCIOS = gql`
       page: $page
       limit: $limit
       titulo: $titulo
+      moneda: $moneda
       precioMin: $precioMin
       precioMax: $precioMax
       provincia: $provincia
