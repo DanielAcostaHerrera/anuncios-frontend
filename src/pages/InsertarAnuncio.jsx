@@ -384,7 +384,8 @@ const construirPayload = () => {
               backgroundColor: "#fff",
               border: "1px solid var(--color-border)",
               color: "var(--color-text)",
-              padding: 8,
+              textAlign: "justify",
+              padding: 8,             
               borderRadius: 6
             }}
           />
@@ -479,7 +480,7 @@ const construirPayload = () => {
                 }
 
                 showToast("Anuncio añadido correctamente");
-                navigate("/catalogo-anuncios");
+                navigate("/");
               } catch (err) {
                 console.error(err);
                 showToast("Error añadiendo el anuncio");

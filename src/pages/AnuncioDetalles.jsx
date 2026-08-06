@@ -35,10 +35,10 @@ export default function AnuncioDetalles() {
           <div
             className="ver-wrapper"
             style={{
-              backgroundColor: "var(--color-bg)",   // igual que filtros
+              backgroundColor: "var(--color-bg)",
               padding: 20,
               borderRadius: 10,
-              border: "1px solid var(--color-border)", // borde suave
+              border: "1px solid var(--color-border)",
               maxWidth: 600,
               margin: "0 auto",
               display: "flex",
@@ -62,10 +62,11 @@ export default function AnuncioDetalles() {
                 if (error) return null;
 
                 const moneda = data.monedas.find(m => m.Id === a.Moneda)?.nombre || "";
+                const precioFormateado = Number(a.Precio).toLocaleString("es-ES");
 
                 return (
                   <p className="ver-precio">
-                    {a.Precio} {moneda}
+                    {precioFormateado} {moneda}
                   </p>
                 );
               }}
@@ -100,9 +101,15 @@ export default function AnuncioDetalles() {
               </span>
             </div>
 
+            {/* Nombre del anunciante */}
+            {a.NombreAnunciante && (
+              <div className="ver-precio">
+                👤 {a.NombreAnunciante}
+              </div>
+            )}
+
             {/* Botones de contacto */}
             <div className="ver-contacto">
-
               {/* WhatsApp */}
               {a.Celular && (
                 <button className="btn-whatsapp" onClick={enviarWhatsApp}>
@@ -120,7 +127,9 @@ export default function AnuncioDetalles() {
 
             {/* Descripción */}
             <div className="ver-descripcion">
-              <p>{a.Descripcion}</p>
+              <p style={{ whiteSpace: "pre-line", textAlign: "justify" }}>
+                {a.Descripcion}
+              </p>
             </div>
 
           </div>
@@ -129,6 +138,8 @@ export default function AnuncioDetalles() {
     </Query>
   );
 }
+
+
 
 
 

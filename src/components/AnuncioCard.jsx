@@ -23,65 +23,71 @@ export default function AnuncioCard({ anuncio, showToast, from }) {
         border: "1px solid var(--color-border)",
         borderRadius: 6,
         overflow: "hidden",
-        backgroundColor: "var(--color-bg)",         // azul suave
-        boxShadow: "0 2px 6px rgba(0,0,0,0.15)",    // sombra clara
+        backgroundColor: "var(--color-bg)",
+        boxShadow: "0 2px 6px rgba(0,0,0,0.15)",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between", // 🔥 botones siempre abajo
       }}
     >
-      <Link
-        to={`/anuncio/${anuncio.Id}`}
-        state={{ from }}
-        style={{ textDecoration: "none", color: "inherit" }}
-      >
-        <img
-          src={fotoUrl}
-          alt={anuncio.Titulo}
-          style={{
-            width: "100%",
-            height: 180,
-            objectFit: "fill",
-            backgroundColor: "var(--color-bg-alt)",  // azul clarito
-            transition: "transform 0.2s, box-shadow 0.2s",
-            display: "block",
-          }}
-          loading="lazy"
-        />
-
-        <h3
-          style={{
-            margin: 8,
-            fontSize: 15,
-            color: "var(--color-text)",              // texto azul oscuro
-            textAlign: "center",
-            fontWeight: 600,
-          }}
+      {/* Bloque superior: imagen, precio, título */}
+      <div>
+        <Link
+          to={`/anuncio/${anuncio.Id}`}
+          state={{ from }}
+          style={{ textDecoration: "none", color: "inherit" }}
         >
-          {anuncio.Titulo}
-        </h3>
+          <img
+            src={fotoUrl}
+            alt={anuncio.Titulo}
+            style={{
+              width: "100%",
+              height: 180,
+              objectFit: "fill",
+              backgroundColor: "var(--color-bg-alt)",
+              transition: "transform 0.2s, box-shadow 0.2s",
+              display: "block",
+            }}
+            loading="lazy"
+          />
 
-        {/* ============================
-            MOSTRAR NOMBRE DE LA MONEDA
-           ============================ */}
-        <Query query={GET_MONEDA} variables={{ Id: anuncio.Moneda }}>
-          {({ loading, error, data }) => {
-            const monedaNombre =
-              loading || error ? anuncio.Moneda : data.moneda.nombre;
+          <Query query={GET_MONEDA} variables={{ Id: anuncio.Moneda }}>
+            {({ loading, error, data }) => {
+              const monedaNombre =
+                loading || error ? anuncio.Moneda : data.moneda.nombre;
+              const precioFormateado = Number(anuncio.Precio).toLocaleString("es-ES");
 
-            return (
-              <p
-                style={{
-                  margin: 8,
-                  fontSize: 14,
-                  color: "var(--color-text-light)",   // texto secundario azul
-                  textAlign: "center",
-                }}
-              >
-                {anuncio.Precio} {monedaNombre}
-              </p>
-            );
-          }}
-        </Query>
-      </Link>
+              return (
+                <p
+                  style={{
+                    margin: "8px",
+                    fontSize: 14,
+                    color: "var(--color-text-light)",
+                    textAlign: "justify",
+                    fontWeight: 600, 
+                  }}
+                >
+                  {precioFormateado} {monedaNombre}
+                </p>
+              );
+            }}
+          </Query>
 
+          <h3
+            style={{
+              margin: "8px",
+              fontSize: 15,
+              color: "var(--color-text)",
+              textAlign: "justify",
+              fontWeight: "normal", 
+            }}
+          >
+            {anuncio.Titulo}
+          </h3>
+        </Link>
+      </div>
+
+      {/* Bloque inferior: botones alineados al fondo */}
       {auth.isLogged && (
         <div
           style={{
@@ -89,7 +95,7 @@ export default function AnuncioCard({ anuncio, showToast, from }) {
             justifyContent: "center",
             alignItems: "center",
             gap: 8,
-            marginBottom: 8,
+            padding: "8px",
           }}
         >
           <Mutation mutation={ELIMINAR_ANUNCIO}>
@@ -114,8 +120,6 @@ export default function AnuncioCard({ anuncio, showToast, from }) {
                 {/* Botón eliminar */}
                 <button
                   onClick={async () => {
-                    console.log("anuncio.Fotos =", anuncio.Fotos);
-
                     if (!window.confirm(`¿Eliminar el anuncio "${anuncio.Titulo}"?`)) return;
 
                     try {
@@ -155,7 +159,7 @@ export default function AnuncioCard({ anuncio, showToast, from }) {
                   }}
                   className="admin-delete-btn"
                   style={{
-                    backgroundColor: "#e74c3c",        // rojo claro
+                    backgroundColor: "#e74c3c",
                     color: "white",
                     border: "1px solid #c0392b",
                     borderRadius: 6,
@@ -173,6 +177,8 @@ export default function AnuncioCard({ anuncio, showToast, from }) {
     </div>
   );
 }
+
+
 
 
 

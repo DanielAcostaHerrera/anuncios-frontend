@@ -455,6 +455,7 @@ export default function EditarAnuncio({ showToast }) {
                   backgroundColor: "#fff",
                   border: "1px solid var(--color-border)",
                   color: "var(--color-text)",
+                  textAlign: "justify",
                   padding: 8,
                   borderRadius: 6
                 }}
